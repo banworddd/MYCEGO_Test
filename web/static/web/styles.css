@@ -201,3 +201,40 @@ li {
 .file-container:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+/* Стили для превьюшки файла */
+.file-preview {
+    width: 50px; /* Ширина превьюшки */
+    height: 50px; /* Высота превьюшки */
+    object-fit: cover; /* Сохраняем пропорции изображения */
+    border-radius: 4px; /* Скругление углов */
+    margin-right: 10px; /* Отступ справа */
+}
+
+/* Стили для иконки файла по умолчанию */
+.file-icon {
+    font-size: 20px; /* Размер иконки */
+    margin-right: 10px; /* Отступ справа */
+}
+
+/* Стили для контейнера фильтра */
+.filter-container {
+    margin: 20px 0;
+}
+
+.filter-container label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.filter-container select {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.filter-container select:hover {
+    border-color: #007bff;
+}

@@ -1,5 +1,4 @@
 from .api_utils import  get_files, get_folder
-from django.shortcuts import render
 from .utils import convert_size
 from django.shortcuts import render
 
@@ -17,6 +16,7 @@ def files_view(request):
     try:
         data = get_files(folder_link, token)
         parsed_data = parse_and_sort_files(data, token)
+        print(parsed_data)
     except Exception as e:
         parsed_data = None
         error_message = str(e)
@@ -33,7 +33,10 @@ def parse_and_sort_files(data, token):
         'public_key': data.get('public_key'),
         'public_url': data.get('public_url'),
         'name': data.get('name'),
+        'type': data.get('type'),
+        'file': data.get('file') if data.get('file') else None,
         'created': data.get('created'),
+        'size': convert_size(data.get('size')) if data.get('size') else None,
         'modified': data.get('modified'),
         'owner': data.get('owner', {}).get('display_name'),
         'items': []
@@ -46,7 +49,7 @@ def parse_and_sort_files(data, token):
                 'type': item.get('type'),
                 'created': item.get('created'),
                 'modified': item.get('modified'),
-                'size': convert_size(item.get('size', 0)),  # Преобразуем размер
+                'size': convert_size(item.get('size', 0)),
                 'mime_type': item.get('mime_type'),
                 'path': item.get('path'),
                 'preview': item.get('preview', '') if item.get('type') == 'file' else '',

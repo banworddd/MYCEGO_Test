@@ -15,13 +15,26 @@
             <h1>Содержимое папки: {{ files_data.name }}</h1>
             <p>Владелец: {{ files_data.owner }}</p>
 
+            <!-- Выпадающий список для фильтрации -->
+            <div class="filter-container">
+                <label for="mime-type-filter">Фильтр по типу файла:</label>
+                <select id="mime-type-filter">
+                    <option value="all">Все файлы</option>
+                    <option value="image">Изображения</option>
+                    <option value="video">Видео</option>
+                    <option value="audio">Аудио</option>
+                    <option value="application">Документы</option>
+                    <option value="text">Текстовые файлы</option>
+                </select>
+            </div>
+
             {% if error_message %}
                 <p style="color: red;">Ошибка: {{ error_message }}</p>
             {% endif %}
 
-            <ul>
+            <ul id="file-list">
                 {% for item in files_data.items %}
-                    <li>
+                    <li class="file-item" data-mime-type="{{ item.mime_type }}">
                         {% if item.type == 'dir' %}
                             <div class="folder-container">
                                 <div class="folder-header">
@@ -38,7 +51,13 @@
                             <div class="file-container">
                                 <div class="file">
                                     <input type="checkbox" class="file-checkbox" data-url="{{ item.file }}">
-                                    📄 <a href="{{ item.preview }}" target="_blank">{{ item.name }}</a> (файл, {{ item.size }})
+                                    {% if item.preview %}
+                                        <img src="{{ item.preview }}" alt="{{ item.name }}" class="file-preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                        <span class="file-icon" style="display: none;">📄</span>
+                                    {% else %}
+                                        <span class="file-icon">📄</span>
+                                    {% endif %}
+                                    <a href="{{ item.file }}" target="_blank">{{ item.name }}</a> (файл, {{ item.size }})
                                 </div>
                             </div>
                         {% endif %}

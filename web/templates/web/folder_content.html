@@ -1,6 +1,6 @@
 <ul>
     {% for item in files_data.items %}
-        <li>
+        <li class="file-item" data-mime-type="{{ item.mime_type }}">
             {% if item.type == 'dir' %}
                 <div class="folder-container">
                     <div class="folder-header">
@@ -17,7 +17,13 @@
                 <div class="file-container">
                     <div class="file">
                         <input type="checkbox" class="file-checkbox" data-url="{{ item.file }}">
-                        📄 <a href="{{ item.preview }}" target="_blank">{{ item.name }}</a> (файл, {{ item.size }})
+                        {% if item.preview %}
+                            <img src="{{ item.preview }}" alt="{{ item.name }}" class="file-preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                            <span class="file-icon" style="display: none;">📄</span>
+                        {% else %}
+                            <span class="file-icon">📄</span>
+                        {% endif %}
+                        <a href="{{ item.file }}" target="_blank">{{ item.name }}</a> (файл, {{ item.size }})
                     </div>
                 </div>
             {% endif %}
