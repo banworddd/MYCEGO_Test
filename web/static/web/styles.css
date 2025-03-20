@@ -151,13 +151,12 @@ li {
     border-radius: 8px;
     padding: 15px;
     margin: 10px auto; /* Центрируем папку */
-    width: 100%;
-    max-width: 600px;
+    width: 600px; /* Фиксированная ширина */
+    box-sizing: border-box; /* Учитываем padding и border в общей ширине */
     background-color: #f9f9f9;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 .folder-container:hover {
     background-color: #f1f1f1;
 }
@@ -191,8 +190,8 @@ li {
     border-radius: 8px;
     padding: 15px;
     margin: 10px auto; /* Центрируем файл */
-    width: 100%;
-    max-width: 600px;
+    width: 600px; /* Фиксированная ширина */
+    box-sizing: border-box; /* Учитываем padding и border в общей ширине */
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;

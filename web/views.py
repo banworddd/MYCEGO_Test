@@ -16,7 +16,6 @@ def files_view(request):
     try:
         data = get_files(folder_link, token)
         parsed_data = parse_and_sort_files(data, token)
-        print(parsed_data)
     except Exception as e:
         parsed_data = None
         error_message = str(e)
@@ -39,6 +38,7 @@ def parse_and_sort_files(data, token):
         'size': convert_size(data.get('size')) if data.get('size') else None,
         'modified': data.get('modified'),
         'owner': data.get('owner', {}).get('display_name'),
+        'preview' : data.get('preview'),
         'items': []
     }
 
