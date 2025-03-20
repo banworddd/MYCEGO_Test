@@ -1,13 +1,24 @@
 from django.shortcuts import render
 from .api_utils import  get_files, get_folder
+from django.shortcuts import render
+
 def files_view(request):
     token = 'y0__xDFurDEBxj1nDYgxNPxyxIxtNPaRMrGN0O0PQ4ual9EjZTCkg'
-    folder_link = 'https://disk.yandex.ru/d/BQgyGxy-jLQRqA'
-    data = get_files(folder_link, token)
-    parsed_data = parse_and_sort_files(data, token)
-    print(parsed_data)
-    return render(request, 'web/files.html',  {'files_data': parsed_data})
+    folder_link = request.GET.get('folder_link')  # По умолчанию или из формы
 
+    try:
+        data = get_files(folder_link, token)
+        parsed_data = parse_and_sort_files(data, token)
+    except Exception as e:
+        parsed_data = None
+        error_message = str(e)
+    else:
+        error_message = None
+
+    return render(request, 'web/files.html', {
+        'files_data': parsed_data,
+        'error_message': error_message,
+    })
 
 def parse_and_sort_files(data, token):
     parsed_data = {

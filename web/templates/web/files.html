@@ -18,45 +18,75 @@
         .file {
             color: #007BFF;
         }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .form-container input[type="text"] {
+            width: 300px;
+            padding: 8px;
+            font-size: 16px;
+        }
+        .form-container input[type="submit"] {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <h1>Содержимое папки: {{ files_data.name }}</h1>
-    <p>Владелец: {{ files_data.owner }}</p>
-    <p>Создано: {{ files_data.created }}</p>
-    <p>Изменено: {{ files_data.modified }}</p>
+    <div class="form-container">
+        <form method="GET" action="">
+            <input type="text" name="folder_link" placeholder="Введите ссылку на папку Яндекс.Диска" required>
+            <input type="submit" value="Показать содержимое">
+        </form>
+    </div>
 
-    <ul>
-        {% for item in files_data.items %}
-            <li>
-                {% if item.type == 'dir' %}
-                    <div class="folder">
-                        📁 {{ item.name }} (папка)
-                    </div>
-                    {% if item.items %}
-                        <ul>
-                            {% for subitem in item.items %}
-                                <li>
-                                    {% if subitem.type == 'dir' %}
-                                        <div class="folder">
-                                            📁 {{ subitem.name }} (папка)
-                                        </div>
-                                    {% else %}
-                                        <div class="file">
-                                            📄 <a href="{{ subitem.preview }}" target="_blank">{{ subitem.name }}</a> (файл, {{ subitem.size }} байт)
-                                        </div>
-                                    {% endif %}
-                                </li>
-                            {% endfor %}
-                        </ul>
+    {% if files_data %}
+        <h1>Содержимое папки: {{ files_data.name }}</h1>
+        <p>Владелец: {{ files_data.owner }}</p>
+        <p>Создано: {{ files_data.created }}</p>
+        <p>Изменено: {{ files_data.modified }}</p>
+
+        <ul>
+            {% for item in files_data.items %}
+                <li>
+                    {% if item.type == 'dir' %}
+                        <div class="folder">
+                            📁 {{ item.name }} (папка)
+                        </div>
+                        {% if item.items %}
+                            <ul>
+                                {% for subitem in item.items %}
+                                    <li>
+                                        {% if subitem.type == 'dir' %}
+                                            <div class="folder">
+                                                📁 {{ subitem.name }} (папка)
+                                            </div>
+                                        {% else %}
+                                            <div class="file">
+                                                📄 <a href="{{ subitem.preview }}" target="_blank">{{ subitem.name }}</a> (файл, {{ subitem.size }} байт)
+                                            </div>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% else %}
+                        <div class="file">
+                            📄 <a href="{{ item.preview }}" target="_blank">{{ item.name }}</a> (файл, {{ item.size }} байт)
+                        </div>
                     {% endif %}
-                {% else %}
-                    <div class="file">
-                        📄 <a href="{{ item.preview }}" target="_blank">{{ item.name }}</a> (файл, {{ item.size }} байт)
-                    </div>
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Введите ссылку на папку, чтобы увидеть её содержимое.</p>
+    {% endif %}
 </body>
 </html>

@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views  # Импортируем представления
+from . import views
 
 urlpatterns = [
-    path('', views.files_view, name='index'),  # Пример маршрута
+    path('', views.files_view, name='index'),
 ]
