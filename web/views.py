@@ -1,14 +1,15 @@
 from django.shortcuts import render
-from .api_utils import  get_files
+from .api_utils import  get_files, get_folder
 def files_view(request):
     token = 'y0__xDFurDEBxj1nDYgxNPxyxIxtNPaRMrGN0O0PQ4ual9EjZTCkg'
     folder_link = 'https://disk.yandex.ru/d/BQgyGxy-jLQRqA'
     data = get_files(folder_link, token)
-    parsed_data = parse_and_sort_files(data)
+    parsed_data = parse_and_sort_files(data, token)
     print(parsed_data)
-    return render(request, 'web/files.html')
+    return render(request, 'web/files.html',  {'files_data': parsed_data})
 
-def parse_and_sort_files(data):
+
+def parse_and_sort_files(data, token):
     parsed_data = {
         'public_key': data.get('public_key'),
         'public_url': data.get('public_url'),
@@ -31,6 +32,12 @@ def parse_and_sort_files(data):
                 'path': item.get('path'),
                 'preview': item.get('preview', '') if item.get('type') == 'file' else ''
             }
+
+            # Если это папка, рекурсивно получаем её содержимое
+            if item.get('type') == 'dir':
+                folder_data = get_folder(data['public_key'], token, item['path'])
+                item_data['items'] = parse_and_sort_files(folder_data, token)['items']
+
             parsed_data['items'].append(item_data)
 
         # Сортируем элементы по имени
