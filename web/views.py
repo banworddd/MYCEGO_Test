@@ -3,7 +3,8 @@ from .api_utils import  get_files, get_folder
 from django.shortcuts import render
 
 def files_view(request):
-    token = 'y0__xDFurDEBxj1nDYgxNPxyxIxtNPaRMrGN0O0PQ4ual9EjZTCkg'
+    token = request.session.get('yandex_token')
+    print(token)
     folder_link = request.GET.get('folder_link')
 
     try:
@@ -14,7 +15,6 @@ def files_view(request):
         error_message = str(e)
     else:
         error_message = None
-    print(parsed_data)
     return render(request, 'web/files.html', {
         'files_data': parsed_data,
         'error_message': error_message,
@@ -45,7 +45,6 @@ def parse_and_sort_files(data, token):
                 'file': item.get('file') if item.get('type') == 'file' else '',
             }
 
-            # Если это папка, рекурсивно получаем её содержимое
             if item.get('type') == 'dir':
                 folder_data = get_folder(data['public_key'], token, item['path'])
                 item_data['items'] = parse_and_sort_files(folder_data, token)['items']

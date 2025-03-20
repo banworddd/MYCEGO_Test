@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация через Яндекс</title>
+    <style>
+        .auth-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .auth-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #FFCC00; /* Цвет Яндекс */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .auth-button:hover {
+            background-color: #e6b800;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h1>Авторизация через Яндекс</h1>
+        <p>Для доступа к вашему Яндекс.Диску необходимо авторизоваться.</p>
+        <a href="{% url 'yandex_auth' %}">
+            <button class="auth-button">Авторизоваться через Яндекс</button>
+        </a>
+    </div>
+</body>
+</html>
