@@ -2,17 +2,23 @@
     {% for item in files_data.items %}
         <li>
             {% if item.type == 'dir' %}
-                <div class="folder">
-                    📁 {{ item.name }} (папка)
+                <div class="folder-container">
+                    <div class="folder-header">
+                        <span class="folder-icon">📁</span>
+                        <span>{{ item.name }}</span>
+                    </div>
                 </div>
-                {% if item.items %}
-
-                    {% include "web/folder_content.html" with files_data=item %}
-                {% endif %}
+                <div class="folder-content">
+                    {% if item.items %}
+                        {% include "web/folder_content.html" with files_data=item %}
+                    {% endif %}
+                </div>
             {% else %}
-                <div class="file">
-                    📄<a href="{{ item.file }}" target="_blank"> Загрузить</a>
-                    <a href="{{ item.preview }}" target="_blank">{{ item.name }}</a> (файл, {{ item.size }} байт)
+                <div class="file-container">
+                    <div class="file">
+                        <input type="checkbox" class="file-checkbox" data-url="{{ item.file }}">
+                        📄 <a href="{{ item.preview }}" target="_blank">{{ item.name }}</a> (файл, {{ item.size }})
+                    </div>
                 </div>
             {% endif %}
         </li>

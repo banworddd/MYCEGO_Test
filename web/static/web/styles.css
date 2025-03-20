@@ -1,0 +1,203 @@
+/* Убираем отступы у body и html */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Стили для формы */
+.form-container {
+    margin-bottom: 20px;
+}
+
+.form-container input[type="text"] {
+    width: 300px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-container input[type="submit"] {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-container input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для списка файлов */
+ul {
+    list-style-type: none;
+    padding-left: 0; /* Убираем отступ слева */
+    margin: 0; /* Убираем внешние отступы */
+}
+
+li {
+    margin: 10px 0;
+}
+
+.folder {
+    font-weight: bold;
+    color: #333;
+}
+
+.file {
+    color: #007BFF;
+    display: flex;
+    align-items: center;
+}
+
+.file input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.file a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.file a:hover {
+    text-decoration: underline;
+}
+
+/* Стили для кнопки скачивания */
+.download-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.download-button:hover {
+    background-color: #218838;
+}
+
+/* Стили для хедера */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Стили для кнопок в хедере */
+.nav-button {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #218838;
+}
+
+/* Стили для статуса авторизации */
+.auth-status {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Центрируем содержимое страницы файлов */
+.files-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+/* Стили для папок */
+.folder-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px auto; /* Центрируем папку */
+    width: 100%;
+    max-width: 600px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.folder-container:hover {
+    background-color: #f1f1f1;
+}
+
+.folder-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.folder-icon {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+/* Стили для содержимого папки */
+.folder-content {
+    display: none; /* Скрываем содержимое по умолчанию */
+    width: 100%;
+    max-width: 600px;
+    margin: 10px auto; /* Центрируем содержимое */
+    margin-left: 30px; /* Смещаем содержимое влево */
+}
+
+.folder-content.open {
+    display: block; /* Показываем содержимое при открытии */
+}
+/* Стили для контейнера файла */
+.file-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px auto; /* Центрируем файл */
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.file-container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

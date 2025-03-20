@@ -1,11 +1,18 @@
-from django.shortcuts import render
 from .api_utils import  get_files, get_folder
+from django.shortcuts import render
+from .utils import convert_size
 from django.shortcuts import render
 
 def files_view(request):
     token = request.session.get('yandex_token')
-    print(token)
     folder_link = request.GET.get('folder_link')
+
+    # Если ссылка на папку не передана, не выполняем запрос
+    if not folder_link:
+        return render(request, 'web/files.html', {
+            'files_data': None,
+            'error_message': None,
+        })
 
     try:
         data = get_files(folder_link, token)
@@ -15,6 +22,7 @@ def files_view(request):
         error_message = str(e)
     else:
         error_message = None
+
     return render(request, 'web/files.html', {
         'files_data': parsed_data,
         'error_message': error_message,
@@ -38,7 +46,7 @@ def parse_and_sort_files(data, token):
                 'type': item.get('type'),
                 'created': item.get('created'),
                 'modified': item.get('modified'),
-                'size': item.get('size', 0),
+                'size': convert_size(item.get('size', 0)),  # Преобразуем размер
                 'mime_type': item.get('mime_type'),
                 'path': item.get('path'),
                 'preview': item.get('preview', '') if item.get('type') == 'file' else '',

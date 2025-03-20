@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Файлы на Яндекс.Диске{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'web/styles.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Хедер -->
+    <header class="header">
+        <div class="header-left">
+            <a href="{% url 'files_view' %}" class="nav-button">Файлы</a>
+        </div>
+        <div class="header-right">
+            {% if request.session.yandex_token %}
+                <p class="auth-status">Вы авторизованы! 🟢</p>
+                <a href="{% url 'logout_view' %}" class="nav-button">Закончить сессию</a>
+            {% else %}
+                <p class="auth-status">Вы не авторизованы. 🔴</p>
+                <a href="{% url 'auth' %}" class="nav-button">Авторизоваться</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Основное содержимое страницы -->
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script src="{% static 'web/scripts.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

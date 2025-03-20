@@ -1,57 +1,52 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Файлы на Яндекс.Диске</title>
-    <style>
-        ul {
-            list-style-type: none;
-            padding-left: 20px;
-        }
-        li {
-            margin: 5px 0;
-        }
-        .folder {
-            font-weight: bold;
-        }
-        .file {
-            color: #007BFF;
-        }
-        .form-container {
-            margin-bottom: 20px;
-        }
-        .form-container input[type="text"] {
-            width: 300px;
-            padding: 8px;
-            font-size: 16px;
-        }
-        .form-container input[type="submit"] {
-            padding: 8px 16px;
-            font-size: 16px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .form-container input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <div class="form-container">
-        <form method="GET" action="">
-            <input type="text" name="folder_link" placeholder="Введите ссылку на папку Яндекс.Диска" required>
-            <input type="submit" value="Показать содержимое">
-        </form>
-    </div>
+{% extends "layout.html" %}
 
-    {% if files_data %}
-        <!-- Включаем шаблон для отображения содержимого папки -->
-        {% include "web/folder_content.html" with files_data=files_data %}
-    {% else %}
-        <p>Введите ссылку на папку, чтобы увидеть её содержимое.</p>
-    {% endif %}
-</body>
-</html>
+{% block title %}Файлы на Яндекс.Диске{% endblock %}
+
+{% block content %}
+    <div class="files-page">
+        <div class="form-container">
+            <form method="GET" action="">
+                <input type="text" name="folder_link" placeholder="Введите ссылку на папку Яндекс.Диска" required>
+                <input type="submit" value="Показать содержимое">
+            </form>
+        </div>
+
+        {% if files_data %}
+            <h1>Содержимое папки: {{ files_data.name }}</h1>
+            <p>Владелец: {{ files_data.owner }}</p>
+
+            {% if error_message %}
+                <p style="color: red;">Ошибка: {{ error_message }}</p>
+            {% endif %}
+
+            <ul>
+                {% for item in files_data.items %}
+                    <li>
+                        {% if item.type == 'dir' %}
+                            <div class="folder-container">
+                                <div class="folder-header">
+                                    <span class="folder-icon">📁</span>
+                                    <span>{{ item.name }}</span>
+                                </div>
+                            </div>
+                            <div class="folder-content">
+                                {% if item.items %}
+                                    {% include "web/folder_content.html" with files_data=item %}
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="file-container">
+                                <div class="file">
+                                    <input type="checkbox" class="file-checkbox" data-url="{{ item.file }}">
+                                    📄 <a href="{{ item.preview }}" target="_blank">{{ item.name }}</a> (файл, {{ item.size }})
+                                </div>
+                            </div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <button class="download-button" onclick="downloadSelectedFiles()">Скачать выбранные файлы</button>
+        {% endif %}
+    </div>
+{% endblock %}

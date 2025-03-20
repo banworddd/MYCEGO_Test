@@ -5,7 +5,6 @@ def auth_view(request):
 
     return render(request, 'users/auth.html')
 
-
 def oauth_callback(request):
 
     code = request.GET.get('code')  # Код авторизации
@@ -30,7 +29,6 @@ def oauth_callback(request):
     if response.status_code == 200:
         token_data = response.json()
         access_token = token_data.get('access_token')  # Временный токен
-        print(access_token)
         # Сохраняем токен в сессии
         request.session['yandex_token'] = access_token
 
@@ -47,3 +45,8 @@ def yandex_auth(request):
         f'client_id={client_id}&redirect_uri={redirect_uri}'
     )
     return redirect(auth_url)
+
+def logout_view(request):
+    if 'yandex_token' in request.session:
+        del request.session['yandex_token']
+    return redirect('files_view')  # Перенаправляем на страницу файлов
