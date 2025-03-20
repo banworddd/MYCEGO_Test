@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 def files_view(request):
     token = 'y0__xDFurDEBxj1nDYgxNPxyxIxtNPaRMrGN0O0PQ4ual9EjZTCkg'
-    folder_link = request.GET.get('folder_link')  # По умолчанию или из формы
+    folder_link = request.GET.get('folder_link')
 
     try:
         data = get_files(folder_link, token)
@@ -41,7 +41,8 @@ def parse_and_sort_files(data, token):
                 'size': item.get('size', 0),
                 'mime_type': item.get('mime_type'),
                 'path': item.get('path'),
-                'preview': item.get('preview', '') if item.get('type') == 'file' else ''
+                'preview': item.get('preview', '') if item.get('type') == 'file' else '',
+                'file': item.get('file') if item.get('type') == 'file' else '',
             }
 
             # Если это папка, рекурсивно получаем её содержимое

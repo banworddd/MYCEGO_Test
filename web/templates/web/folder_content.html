@@ -11,7 +11,8 @@
                 {% endif %}
             {% else %}
                 <div class="file">
-                    📄 <a href="{{ item.preview }}" target="_blank">{{ item.name }}</a> (файл, {{ item.size }} байт)
+                    📄<a href="{{ item.file }}" target="_blank"> Загрузить</a>
+                    <a href="{{ item.preview }}" target="_blank">{{ item.name }}</a> (файл, {{ item.size }} байт)
                 </div>
             {% endif %}
         </li>
