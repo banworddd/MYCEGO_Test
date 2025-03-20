@@ -48,43 +48,8 @@
     </div>
 
     {% if files_data %}
-        <h1>Содержимое папки: {{ files_data.name }}</h1>
-        <p>Владелец: {{ files_data.owner }}</p>
-        <p>Создано: {{ files_data.created }}</p>
-        <p>Изменено: {{ files_data.modified }}</p>
-
-        <ul>
-            {% for item in files_data.items %}
-                <li>
-                    {% if item.type == 'dir' %}
-                        <div class="folder">
-                            📁 {{ item.name }} (папка)
-                        </div>
-                        {% if item.items %}
-                            <ul>
-                                {% for subitem in item.items %}
-                                    <li>
-                                        {% if subitem.type == 'dir' %}
-                                            <div class="folder">
-                                                📁 {{ subitem.name }} (папка)
-                                            </div>
-                                        {% else %}
-                                            <div class="file">
-                                                📄 <a href="{{ subitem.preview }}" target="_blank">{{ subitem.name }}</a> (файл, {{ subitem.size }} байт)
-                                            </div>
-                                        {% endif %}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                    {% else %}
-                        <div class="file">
-                            📄 <a href="{{ item.preview }}" target="_blank">{{ item.name }}</a> (файл, {{ item.size }} байт)
-                        </div>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+        <!-- Включаем шаблон для отображения содержимого папки -->
+        {% include "web/folder_content.html" with files_data=files_data %}
     {% else %}
         <p>Введите ссылку на папку, чтобы увидеть её содержимое.</p>
     {% endif %}

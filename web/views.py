@@ -14,7 +14,7 @@ def files_view(request):
         error_message = str(e)
     else:
         error_message = None
-
+    print(parsed_data)
     return render(request, 'web/files.html', {
         'files_data': parsed_data,
         'error_message': error_message,
