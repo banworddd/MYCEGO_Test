@@ -17,6 +17,45 @@ body {
     padding: 20px;
 }
 
+/* Стили для хедера */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Стили для кнопок в хедере */
+.nav-button {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #218838;
+}
+
+/* Стили для статуса авторизации */
+.auth-status {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
 /* Стили для формы */
 .form-container {
     margin-bottom: 20px;
@@ -95,45 +134,6 @@ li {
     background-color: #218838;
 }
 
-/* Стили для хедера */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.header-left, .header-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-/* Стили для кнопок в хедере */
-.nav-button {
-    padding: 8px 16px;
-    font-size: 16px;
-    background-color: #28a745;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.nav-button:hover {
-    background-color: #218838;
-}
-
-/* Стили для статуса авторизации */
-.auth-status {
-    margin: 0;
-    font-size: 16px;
-    font-weight: bold;
-}
-
 /* Центрируем содержимое страницы файлов */
 .files-page {
     display: flex;
@@ -157,6 +157,7 @@ li {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .folder-container:hover {
     background-color: #f1f1f1;
 }
@@ -184,6 +185,7 @@ li {
 .folder-content.open {
     display: block; /* Показываем содержимое при открытии */
 }
+
 /* Стили для контейнера файла */
 .file-container {
     border: 1px solid #ddd;
@@ -200,6 +202,7 @@ li {
 .file-container:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 /* Стили для превьюшки файла */
 .file-preview {
     width: 50px; /* Ширина превьюшки */
@@ -236,4 +239,92 @@ li {
 
 .filter-container select:hover {
     border-color: #007bff;
+}
+
+/* Стили для главной страницы */
+.index-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.index-page h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.description {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.description p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.description ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.description ul li {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.features {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.features h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.features ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.features ul li {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.call-to-action {
+    background-color: #e9ecef;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.call-to-action p {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.call-to-action a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.call-to-action a:hover {
+    text-decoration: underline;
 }

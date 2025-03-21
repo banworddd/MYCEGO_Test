@@ -1,3 +1,4 @@
+// Функция для скачивания выбранных файлов
 function downloadSelectedFiles() {
     const checkboxes = document.querySelectorAll('.file-checkbox:checked');
 
@@ -17,6 +18,7 @@ function downloadSelectedFiles() {
     downloadNextFile(downloadQueue);
 }
 
+// Функция для скачивания следующего файла из очереди
 function downloadNextFile(queue) {
     if (queue.length === 0) return;
 
@@ -28,6 +30,7 @@ function downloadNextFile(queue) {
     }, 1000);
 }
 
+// Функция для скачивания файла по URL
 function downloadFile(url) {
     const link = document.createElement('a');
     link.href = url;
@@ -37,8 +40,7 @@ function downloadFile(url) {
     document.body.removeChild(link);
 }
 
-
-
+// Обработчик события загрузки DOM
 document.addEventListener('DOMContentLoaded', function () {
     const folders = document.querySelectorAll('.folder-container');
 
@@ -54,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Обработчик события загрузки DOM для фильтрации файлов
 document.addEventListener('DOMContentLoaded', function () {
     const filterSelect = document.getElementById('mime-type-filter');
     const fileList = document.getElementById('file-list');
